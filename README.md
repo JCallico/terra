@@ -4,6 +4,8 @@ A cinematic, responsive satellite experience that begins with the whole Earth an
 
 **Live:** [terra.iqapps.space](https://terra.iqapps.space)
 
+![Terra displaying a precise satellite location above Times Square, New York](docs/terra-screenshot.webp)
+
 ## Run locally
 
 ```sh
