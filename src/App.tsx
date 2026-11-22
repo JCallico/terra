@@ -224,7 +224,11 @@ function App() {
             <div className="card-heading">
               <div className="location-icon"><MapPin size={19} fill="currentColor" /></div>
               <div className="place-heading">
-                <span className="card-overline">{journey === 'zooming' ? 'DESTINATION LOCKED' : 'YOUR CURRENT COORDINATES'}</span>
+                <span className="card-overline">
+                  {journey === 'zooming'
+                    ? location.source === 'precise' ? 'DESTINATION LOCKED' : 'APPROXIMATE AREA FOUND'
+                    : location.source === 'precise' ? 'YOUR CURRENT COORDINATES' : 'APPROXIMATE AREA REFERENCE'}
+                </span>
                 <h2>{locationTitle}</h2>
                 <p>{location.placeName ? place : place || 'Planet Earth'}</p>
               </div>
@@ -235,8 +239,8 @@ function App() {
             </div>
 
             <div className="coordinate-grid">
-              <div><span>LATITUDE</span><strong>{formatCoordinate(location.latitude, 'lat')}</strong></div>
-              <div><span>LONGITUDE</span><strong>{formatCoordinate(location.longitude, 'lng')}</strong></div>
+              <div><span>{location.source === 'precise' ? 'LATITUDE' : 'AREA LATITUDE'}</span><strong>{formatCoordinate(location.latitude, 'lat')}</strong></div>
+              <div><span>{location.source === 'precise' ? 'LONGITUDE' : 'AREA LONGITUDE'}</span><strong>{formatCoordinate(location.longitude, 'lng')}</strong></div>
               <button className={copied ? 'copied' : ''} onClick={copyCoordinates} aria-label="Copy decimal coordinates" title="Copy coordinates">
                 {copied ? <Check size={17} /> : <Copy size={16} />}<span>{copied ? 'COPIED' : 'COPY'}</span>
               </button>

@@ -110,9 +110,12 @@ const SatelliteMap = forwardRef<MapHandle, SatelliteMapProps>(function Satellite
     callbackRef.current('zooming');
     markerRef.current?.remove();
     const markerElement = document.createElement('div');
-    markerElement.className = 'location-marker';
-    markerElement.innerHTML = '<span class="marker-core"></span><span class="marker-pulse"></span>';
-    markerElement.setAttribute('aria-label', 'Your detected location');
+    const isPrecise = location.source === 'precise';
+    markerElement.className = isPrecise ? 'location-marker' : 'location-area-marker';
+    markerElement.innerHTML = isPrecise
+      ? '<span class="marker-core"></span><span class="marker-pulse"></span>'
+      : '<span>APPROXIMATE AREA</span>';
+    markerElement.setAttribute('aria-label', isPrecise ? 'Your precise location' : 'Your approximate location area');
     markerRef.current = new Marker({ element: markerElement, anchor: 'center' })
       .setLngLat([location.longitude, location.latitude])
       .addTo(map);
@@ -121,7 +124,7 @@ const SatelliteMap = forwardRef<MapHandle, SatelliteMapProps>(function Satellite
     const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     map.flyTo({
       center: [location.longitude, location.latitude],
-      zoom: location.source === 'precise' ? 18.25 : 14.25,
+      zoom: location.source === 'precise' ? 18.25 : 11.5,
       duration: reducedMotion ? 800 : 18_000,
       curve: 1.15,
       essential: true,
@@ -135,7 +138,7 @@ const SatelliteMap = forwardRef<MapHandle, SatelliteMapProps>(function Satellite
       callbackRef.current('zooming');
       mapRef.current.flyTo({
         center: [location.longitude, location.latitude],
-        zoom: location.source === 'precise' ? 18.25 : 14.25,
+        zoom: location.source === 'precise' ? 18.25 : 11.5,
         duration: 2200,
         essential: true,
       });

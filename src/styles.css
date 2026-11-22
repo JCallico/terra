@@ -193,6 +193,20 @@ button:disabled { opacity: 0.35; cursor: not-allowed; }
 .toast { position: absolute; z-index: 30; left: 50%; bottom: 40px; transform: translateX(-50%); background: #e1f6b5; color: #1a2311; padding: 12px 18px; border-radius: 4px; display: flex; align-items: center; gap: 8px; font-size: 11px; box-shadow: 0 10px 40px rgba(0,0,0,.3); animation: toast-in .3s both; }
 
 .location-marker { position: relative; width: 52px; height: 52px; display: grid; place-items: center; }
+.location-area-marker {
+  position: relative;
+  width: 170px;
+  height: 170px;
+  display: grid;
+  place-items: center;
+  pointer-events: none;
+  border: 1px solid rgba(216,250,114,.55);
+  border-radius: 50%;
+  background: rgba(216,250,114,.055);
+  box-shadow: 0 0 0 16px rgba(216,250,114,.025), inset 0 0 35px rgba(216,250,114,.04);
+}
+.location-area-marker::before { content: ''; position: absolute; inset: 9px; border: 1px dashed rgba(216,250,114,.25); border-radius: 50%; }
+.location-area-marker > span { z-index: 1; padding: 6px 8px; border: 1px solid rgba(216,250,114,.22); border-radius: 2px; background: rgba(6,10,9,.82); color: var(--acid); font: 400 7px/1 var(--mono); letter-spacing: 1px; white-space: nowrap; }
 .marker-core { width: 11px; height: 11px; background: var(--acid); border: 2px solid #17200d; border-radius: 50%; box-shadow: 0 0 0 2px var(--acid), 0 0 25px 5px rgba(216,250,114,.65); z-index: 2; }
 .marker-pulse { position: absolute; inset: 3px; border: 1px solid rgba(216,250,114,.8); border-radius: 50%; animation: marker-pulse 2.2s ease-out infinite; }
 
